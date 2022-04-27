@@ -1,0 +1,45 @@
+// DFS algorithm in Java
+import java.util.*;
+public class Graph {
+ private LinkedList<Integer> adjLists[];
+ private boolean visited[];
+ // Graph creation
+ Graph(int vertices) {
+ adjLists = new LinkedList[vertices];
+ visited = new boolean[vertices];
+ for (int i = 0; i < vertices; i++)
+ adjLists[i] = new LinkedList<Integer>();
+ }
+ // Add edges
+ void insertEdge(int src, int dest) {
+ adjLists[src].add(dest);
+ }
+ // DFS algorithm
+ void DFS(int vertex) {
+ visited[vertex] = true;
+ System.out.print(vertex + " ");
+ Iterator<Integer> ite = adjLists[vertex].listIterator();
+ while (ite.hasNext()) {
+ int adj = ite.next();
+ if (!visited[adj])
+ DFS(adj);
+ }
+ }
+ public static void main(String args[]) {
+ Graph graph = new Graph(12);
+ graph.insertEdge(0, 1);
+ graph.insertEdge(0, 3);
+ graph.insertEdge(0, 4);
+ graph.insertEdge(4, 5);
+ graph.insertEdge(3, 5);
+ graph.insertEdge(1, 2);
+ graph.insertEdge(1, 0);
+ graph.insertEdge(2, 1);
+ graph.insertEdge(4, 1);
+ graph.insertEdge(3, 1);
+ graph.insertEdge(5, 4);
+ graph.insertEdge(5, 3);
+ System.out.println("Following is Depth First Traversal");
+ graph.DFS(2);
+ }
+}
